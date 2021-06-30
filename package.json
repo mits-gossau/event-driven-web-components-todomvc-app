@@ -1,7 +1,20 @@
 {
-  "private": true,
+  "name": "event-driven-web-components-todomvc-app",
+  "version": "0.0.1",
+  "description": "todomvc application built with Vanilla JS Web Components in an Event Driven Architecture",
+  "main": "./index.html",
+  "scripts": {
+    "fix": "standard --fix",
+    "serve": "live-server --port=4200 --host=localhost"
+  },
+  "author": "weedshaker@gmail.com, https://github.com/tailormadecode, https://github.com/V4L3",
+  "license": "MIT",
   "dependencies": {
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0"
+    "todomvc-app-css": "*",
+    "todomvc-common": "*"
+  },
+  "devDependencies": {
+    "live-server": "*",
+    "standard": "*"
   }
 }
