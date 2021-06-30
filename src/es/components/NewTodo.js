@@ -1,10 +1,10 @@
 // @ts-check
 
 /* global CustomEvent */
-/* global HTMLElement */
+/* global HTMLInputElement */
 
 /**
- * As an atom, this component can not hold further children (those would be quantum)
+ * NewTodo is the todo input field
  *
  * @export
  * @class NewTodo
@@ -14,16 +14,17 @@ export default class NewTodo extends HTMLInputElement {
     super()
 
     this.valueListener = event => {
-      if (event.keyCode !== undefined && event.keyCode !== 13) return
-      this.dispatchEvent(new CustomEvent('new-todo', {
+      if (!this.value || (event.keyCode !== undefined && event.keyCode !== 13)) return
+      const value = this.value
+      this.value = ''
+      this.dispatchEvent(new CustomEvent(this.getAttribute('new-todo') || 'new-todo', {
         detail: {
-          value: this.value
+          value
         },
         bubbles: true,
         cancelable: true,
         composed: true
       }))
-      this.value = ''
     }
   }
 
