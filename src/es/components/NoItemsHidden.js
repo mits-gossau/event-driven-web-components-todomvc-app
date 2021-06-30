@@ -1,7 +1,7 @@
 // @ts-check
 
-/* global CustomEvent */
-/* global HTMLInputElement */
+/* global HTMLElement */
+/* global self */
 
 /**
  * NoItemsHidden
@@ -14,7 +14,7 @@ export default class NoItemsHidden extends HTMLElement {
     super()
 
     this.hidden = true
-    this.allItemsListener = event => this.hidden = !event.detail.items.length
+    this.allItemsListener = event => (this.hidden = !event.detail.items.length)
   }
 
   connectedCallback () {

@@ -1,7 +1,10 @@
 // @ts-check
 
+/* global customElements */
 /* global CustomEvent */
 /* global HTMLUListElement */
+/* global localStorage */
+/* global self */
 
 /**
  * TodoList
@@ -29,7 +32,7 @@ export default class TodoList extends HTMLUListElement {
       this.updateListener(event)
     }
   }
-  
+
   connectedCallback () {
     self.addEventListener('new-todo', this.newTodoListener)
     self.addEventListener('toggle-all', this.toggleAllListener)

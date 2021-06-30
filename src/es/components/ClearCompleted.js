@@ -1,7 +1,7 @@
 // @ts-check
 
 /* global CustomEvent */
-/* global HTMLUListElement */
+/* global HTMLButtonElement */
 
 /**
  * ClearCompleted

@@ -2,6 +2,7 @@
 
 /* global CustomEvent */
 /* global HTMLInputElement */
+/* global self */
 
 /**
  * ToggleAll toggles all todos as done or not
@@ -25,7 +26,7 @@ export default class ToggleAll extends HTMLInputElement {
       }))
     }
     this.allItemsListener = event => {
-      //console.log('changed', event);
+      // console.log('changed', event);
       this.checked = event.detail.allChecked
     }
   }

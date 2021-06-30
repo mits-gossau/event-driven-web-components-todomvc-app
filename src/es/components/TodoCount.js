@@ -1,7 +1,7 @@
 // @ts-check
 
-/* global CustomEvent */
-/* global HTMLInputElement */
+/* global HTMLElement */
+/* global self */
 
 /**
  * TodoCount
@@ -13,7 +13,7 @@ export default class TodoCount extends HTMLElement {
   constructor () {
     super()
 
-    this.allItemsListener = event => this.textContent = event.detail.itemsUnchecked.length
+    this.allItemsListener = event => (this.textContent = event.detail.itemsUnchecked.length)
   }
 
   connectedCallback () {

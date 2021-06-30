@@ -1,6 +1,10 @@
 // @ts-check
 
+/* global customElements */
+/* global CustomEvent */
 /* global HTMLElement */
+/* global location */
+/* global self */
 
 /**
  * TodoItem
@@ -89,8 +93,8 @@ export default class TodoItem extends HTMLElement {
   }
 
   render () {
-    this.loadNewTodo().then(TodoItem => 
-      this.innerHTML = `
+    this.loadNewTodo().then(TodoItem =>
+      (this.innerHTML = `
         <li ${this.checked ? 'class="completed"' : ''}>
           <div class="view">
             <input class="toggle" type="checkbox" ${this.checked ? 'checked' : ''}>
@@ -99,9 +103,8 @@ export default class TodoItem extends HTMLElement {
           </div>
           <input class="edit" value="${this.value}" is="new-todo" new-todo="edit">
         </li>
-      `
+      `)
     )
-    
   }
 
   /**
@@ -117,7 +120,7 @@ export default class TodoItem extends HTMLElement {
   }
 
   isHidden () {
-    return location.hash.includes('completed') && !this.checked ? true : location.hash.includes('active') && this.checked ? true : false
+    return location.hash.includes('completed') && !this.checked ? true : !!(location.hash.includes('active') && this.checked)
   }
 
   get li () {

@@ -1,7 +1,8 @@
 // @ts-check
 
-/* global CustomEvent */
 /* global HTMLUListElement */
+/* global location */
+/* global self */
 
 /**
  * TodoFilters
