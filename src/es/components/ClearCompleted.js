@@ -18,13 +18,16 @@ export default class ClearCompleted extends HTMLButtonElement {
       cancelable: true,
       composed: true
     }))
+    this.allItemsListener = event => (this.hidden = event.detail.itemsUnchecked.length === event.detail.items.length)
   }
 
   connectedCallback () {
     this.addEventListener('click', this.clickListener)
+    self.addEventListener('all-items', this.allItemsListener)
   }
 
   disconnectedCallback () {
     this.removeEventListener('click', this.clickListener)
+    self.removeEventListener('all-items', this.allItemsListener)
   }
 }
