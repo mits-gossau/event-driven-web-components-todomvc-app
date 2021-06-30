@@ -50,9 +50,11 @@ export default class TodoItem extends HTMLElement {
     }
     this.dblclickListener = event => {
       this.li.classList.toggle('editing')
+      this.input.focus()
     }
     this.editListener = event => {
-      this.value = event.detail.value
+      if (!event.detail.escape && !event.detail.value) return this.clickListener({ target: this.button }) // destroy
+      if (!event.detail.escape) this.value = event.detail.value
       // the lines below could be spared by simply this.render() but then the elements would be recreated
       this.li.classList.remove('editing')
       this.label.textContent = this.value
@@ -102,7 +104,7 @@ export default class TodoItem extends HTMLElement {
             <label>${this.value}</label>
             <button class="destroy"></button>
           </div>
-          <input class="edit" value="${this.value}" is="new-todo" new-todo="edit">
+          <input class="edit" value="${this.value}" is="new-todo" new-todo="edit" allow-empty>
         </li>
       `)
     )

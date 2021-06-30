@@ -79,15 +79,14 @@ export default class TodoList extends HTMLUListElement {
   }
 
   saveAllItems () {
-    localStorage.clear()
-    this.items.forEach((item, i) => localStorage.setItem(item.value, `${i}|${item.checked}`))
+    localStorage.setItem('todos-eventdriven', this.items.reduce((acc, item, i) => `${acc}{"id":"${i}","title":"${item.value}","completed":"${item.checked}"}${i + 1 === this.items.length ? '' : ','}`, '[') + ']')
   }
 
   /**
    * @return {Promise}
    */
   loadAllItems () {
-    return Promise.all(Object.keys(localStorage).sort((a, b) => Number(localStorage.getItem(a).split('|')[0]) - Number(localStorage.getItem(b).split('|')[0])).map(key => this.loadTodoItem().then(TodoItem => this.appendChild(new TodoItem(key, localStorage.getItem(key).split('|')[1] === 'true')))))
+    return Promise.all(JSON.parse(localStorage.getItem('todos-eventdriven') || '[]').sort((a, b) => Number(a.id) - Number(b.id)).map(item => this.loadTodoItem().then(TodoItem => this.appendChild(new TodoItem(item.title, item.completed === 'true')))))
   }
 
   /**

@@ -14,11 +14,13 @@ export default class NewTodo extends HTMLInputElement {
     super()
 
     this.valueListener = event => {
-      if (!this.value || (event.keyCode !== undefined && event.keyCode !== 13)) return
-      const value = this.value
+      if ((event.keyCode !== undefined && event.key !== 'Enter' && event.key !== 'Escape')) return
+      const value = this.value.trim()
+      if (!this.hasAttribute('allow-empty') && !value) return
       this.value = ''
       this.dispatchEvent(new CustomEvent(this.getAttribute('new-todo') || 'new-todo', {
         detail: {
+          escape: event.key === 'Escape',
           value
         },
         bubbles: true,
