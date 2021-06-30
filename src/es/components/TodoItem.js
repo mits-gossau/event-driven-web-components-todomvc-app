@@ -17,6 +17,7 @@ export default class TodoItem extends HTMLElement {
     this.inputListener = event => {
       if (event.target === this.checkbox) {
         this.checked = this.checkbox.checked
+        this.hashchangeListener()
         this.dispatchEvent(new CustomEvent('toggle', {
           detail: {
             item: this,
@@ -56,6 +57,7 @@ export default class TodoItem extends HTMLElement {
     this.toggleAllListener = event => {
       this.checked = event.detail.checked
     }
+    this.hashchangeListener = event => (this.hidden = this.isHidden())
   }
 
   connectedCallback () {
@@ -65,6 +67,7 @@ export default class TodoItem extends HTMLElement {
     this.addEventListener('dblclick', this.dblclickListener)
     this.addEventListener('edit', this.editListener)
     self.addEventListener('toggle-all', this.toggleAllListener)
+    self.addEventListener('hashchange', this.hashchangeListener)
   }
 
   disconnectedCallback () {
@@ -73,6 +76,7 @@ export default class TodoItem extends HTMLElement {
     this.removeEventListener('dblclick', this.dblclickListener)
     this.removeEventListener('edit', this.editListener)
     self.removeEventListener('toggle-all', this.toggleAllListener)
+    self.removeEventListener('hashchange', this.hashchangeListener)
   }
 
   /**
@@ -110,6 +114,10 @@ export default class TodoItem extends HTMLElement {
       if (!customElements.get('new-todo')) customElements.define('new-todo', module.default)
       return module.default
     }))
+  }
+
+  isHidden () {
+    return location.hash.includes('completed') && !this.checked ? true : location.hash.includes('active') && this.checked ? true : false
   }
 
   get li () {
