@@ -72,6 +72,7 @@ export default class TodoItem extends HTMLElement {
     this.addEventListener('edit', this.editListener)
     self.addEventListener('toggle-all', this.toggleAllListener)
     self.addEventListener('hashchange', this.hashchangeListener)
+    this.hashchangeListener()
   }
 
   disconnectedCallback () {

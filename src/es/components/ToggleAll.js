@@ -26,7 +26,6 @@ export default class ToggleAll extends HTMLInputElement {
       }))
     }
     this.allItemsListener = event => {
-      // console.log('changed', event);
       this.checked = event.detail.allChecked
     }
   }
