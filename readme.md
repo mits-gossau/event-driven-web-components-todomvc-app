@@ -21,7 +21,7 @@
 *Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
 
 
-## Support
+## Browser compatibility
 - [IOS does not yet support "is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is)
 
 
