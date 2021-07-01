@@ -4,7 +4,7 @@
 /* global HTMLButtonElement */
 
 /**
- * ClearCompleted
+ * ClearCompleted is the clear completed button
  *
  * @export
  * @class ClearCompleted

@@ -34,22 +34,22 @@ export default class TodoList extends HTMLUListElement {
   }
 
   connectedCallback () {
-    self.addEventListener('new-todo', this.newTodoListener)
-    self.addEventListener('toggle-all', this.toggleAllListener)
-    self.addEventListener('clear-completed', this.clearCompletedListener)
     this.addEventListener('edit', this.updateListener)
     this.addEventListener('toggle', this.updateListener)
     this.addEventListener('destroy', this.updateListener)
+    self.addEventListener('new-todo', this.newTodoListener)
+    self.addEventListener('toggle-all', this.toggleAllListener)
+    self.addEventListener('clear-completed', this.clearCompletedListener)
     this.loadAllItems().then(() => this.dispatchAllItems())
   }
 
   disconnectedCallback () {
-    self.removeEventListener('new-todo', this.newTodoListener)
-    self.removeEventListener('toggle-all', this.toggleAllListener)
-    self.removeEventListener('clear-completed', this.clearCompletedListener)
     this.removeEventListener('edit', this.updateListener)
     this.removeEventListener('toggle', this.updateListener)
     this.removeEventListener('destroy', this.updateListener)
+    self.removeEventListener('new-todo', this.newTodoListener)
+    self.removeEventListener('toggle-all', this.toggleAllListener)
+    self.removeEventListener('clear-completed', this.clearCompletedListener)
   }
 
   /**

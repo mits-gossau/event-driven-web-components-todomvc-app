@@ -53,6 +53,7 @@ export default class TodoItem extends HTMLElement {
       this.input.focus()
     }
     this.editListener = event => {
+      // note that this event is emitted by NewTodo.js input field and bubbles further up
       if (!event.detail.escape && !event.detail.value) return this.clickListener({ target: this.button }) // destroy
       if (!event.detail.escape) this.value = event.detail.value
       // the lines below could be spared by simply this.render() but then the elements would be recreated
@@ -105,7 +106,7 @@ export default class TodoItem extends HTMLElement {
             <label>${this.value}</label>
             <button class="destroy"></button>
           </div>
-          <input class="edit" value="${this.value}" is="new-todo" new-todo="edit" allow-empty>
+          <input class="edit" value="${this.value}" is="new-todo" new-todo="edit" allow-empty allow-escape>
         </li>
       `)
     )

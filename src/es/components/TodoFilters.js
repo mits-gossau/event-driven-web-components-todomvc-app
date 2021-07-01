@@ -5,7 +5,7 @@
 /* global self */
 
 /**
- * TodoFilters
+ * TodoFilters are the filters All, Active and Completed
  *
  * @export
  * @class TodoFilters

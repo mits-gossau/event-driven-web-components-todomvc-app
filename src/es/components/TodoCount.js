@@ -4,7 +4,7 @@
 /* global self */
 
 /**
- * TodoCount
+ * TodoCount is the counter of the todo items
  *
  * @export
  * @class TodoCount

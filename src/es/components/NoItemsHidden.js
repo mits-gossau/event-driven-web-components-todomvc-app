@@ -4,7 +4,7 @@
 /* global self */
 
 /**
- * NoItemsHidden
+ * NoItemsHidden are elements which are hidden when there are no items
  *
  * @export
  * @class NoItemsHidden
