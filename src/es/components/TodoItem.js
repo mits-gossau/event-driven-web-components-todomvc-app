@@ -62,6 +62,7 @@ export default class TodoItem extends HTMLElement {
     }
     this.toggleAllListener = event => {
       this.checked = event.detail.checked
+      this.hashchangeListener()
     }
     this.hashchangeListener = event => (this.hidden = this.isHidden())
   }
