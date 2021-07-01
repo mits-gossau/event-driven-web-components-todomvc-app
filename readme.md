@@ -7,16 +7,22 @@
 
 - [Document Object Model (DOM)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
 
+
 ### Articles
 
 - [DOM and the event driven architecture - Introduction](https://dev.to/weedshaker/dom-and-the-event-driven-architecture-1519)
 - [Web Components and now what?](https://dev.to/weedshaker/web-components-and-now-what-k97)
+
 
 ### Support
 
 - [Twitter](https://twitter.com/weedshaker)
 
 *Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
+
+
+## Support
+- [IOS does not yet support "is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is)
 
 
 ## Implementation
