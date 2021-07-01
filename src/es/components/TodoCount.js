@@ -1,6 +1,6 @@
 // @ts-check
 
-/* global HTMLElement */
+/* global HTMLSpanElement */
 /* global self */
 
 /**
@@ -9,7 +9,7 @@
  * @export
  * @class TodoCount
  */
-export default class TodoCount extends HTMLElement {
+export default class TodoCount extends HTMLSpanElement {
   constructor () {
     super()
 

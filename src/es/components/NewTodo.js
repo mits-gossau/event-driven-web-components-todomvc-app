@@ -15,7 +15,7 @@ export default class NewTodo extends HTMLInputElement {
 
     this.valueListener = event => {
       if ((event.keyCode !== undefined && event.key !== 'Enter' && event.key !== 'Escape')) return // write if not blur, enter or escape
-      if (!this.hasAttribute('allow-escape') && event.key === 'Escape') return this.value = '' // clear on escape
+      if (!this.hasAttribute('allow-escape') && event.key === 'Escape') return (this.value = '') // clear on escape
       const value = this.value.trim()
       if (!this.hasAttribute('allow-empty') && !value) return
       this.value = ''
@@ -28,7 +28,6 @@ export default class NewTodo extends HTMLInputElement {
         cancelable: true,
         composed: true
       }))
-      console.log('12changed');
     }
   }
 

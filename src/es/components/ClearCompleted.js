@@ -2,6 +2,7 @@
 
 /* global CustomEvent */
 /* global HTMLButtonElement */
+/* global self */
 
 /**
  * ClearCompleted is the clear completed button
