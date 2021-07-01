@@ -35,7 +35,6 @@ export default class NewTodo extends HTMLInputElement {
   connectedCallback () {
     this.addEventListener('blur', this.valueListener)
     this.addEventListener('keyup', this.valueListener)
-    console.log('addEventListener keyup');
   }
 
   disconnectedCallback () {

@@ -20,7 +20,7 @@
 				<ul class="todo-list" is="todo-list"></ul>
 			</section>
 			<!-- This footer should be hidden by default and shown when there are todos -->
-			<footer class="footer" hidden is="no-items-hidden">
+			<footer class="footer" hidden is="no-items-hidden-footer">
 				<!-- This should be `0 items left` by default -->
 				<span class="todo-count" is="todo-count"><strong>0</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
@@ -54,6 +54,7 @@
 			Promise.all([
 			  // Controllers
 			  import('./es/components/NoItemsHidden.js').then(module => ['no-items-hidden', module.default, { extends: 'section' }]),
+			  import('./es/components/NoItemsHidden.js').then(module => ['no-items-hidden-footer', class extends module.default {}, { extends: 'footer' }]),
 			  import('./es/components/TodoCount.js').then(module => ['todo-count', module.default, { extends: 'strong' }]),
 			  import('./es/components/TodoFilters.js').then(module => ['todo-filters', module.default, { extends: 'ul' }]),
 			  import('./es/components/ToggleAll.js').then(module => ['toggle-all', module.default, { extends: 'input' }]),
