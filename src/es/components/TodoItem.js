@@ -53,13 +53,10 @@ export default class TodoItem extends HTMLElement {
       this.input.focus()
     }
     this.editListener = event => {
-      // note that this event is emitted by NewTodo.js input field and bubbles further up
+      // note that this event 'edit' is emitted by NewTodo.js input field and bubbles further up
       if (!event.detail.escape && !event.detail.value) return this.clickListener({ target: this.button }) // destroy
-      if (!event.detail.escape) this.value = event.detail.value
-      // the lines below could be spared by simply this.render() but then the elements would be recreated
+      this.value = event.detail.escape ? this.value : event.detail.value
       this.li.classList.remove('editing')
-      this.label.textContent = this.value
-      this.input.value = this.value // reapply the value, since the NewTodo.js input field is going to clear itself before emitting the event
     }
     this.toggleAllListener = event => {
       this.checked = event.detail.checked
@@ -70,13 +67,13 @@ export default class TodoItem extends HTMLElement {
 
   connectedCallback () {
     if (this.shouldComponentRender()) this.render()
+    this.hashchangeListener()
     this.addEventListener('input', this.inputListener)
     this.addEventListener('click', this.clickListener)
     this.addEventListener('dblclick', this.dblclickListener)
     this.addEventListener('edit', this.editListener)
     self.addEventListener('toggle-all', this.toggleAllListener)
     self.addEventListener('hashchange', this.hashchangeListener)
-    this.hashchangeListener()
   }
 
   disconnectedCallback () {
@@ -154,6 +151,16 @@ export default class TodoItem extends HTMLElement {
    */
   get input () {
     return this.querySelector('input.edit')
+  }
+
+  get value () {
+    return this._value
+  }
+
+  set value (value) {
+    this._value = value
+    if (this.label) this.label.textContent = this.value
+    if (this.input) this.input.value = this.value
   }
 
   get checked () {
