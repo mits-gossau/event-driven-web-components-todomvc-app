@@ -22,7 +22,7 @@
 
 
 ## Browser compatibility
-- [IOS does not yet support "is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is)
+- [IOS does not yet support "is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is), even though I used it deliberately. You can at anytime fall back to use web components without ["is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) => https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define and then it will work in any modern browser.
 
 
 ## Implementation
