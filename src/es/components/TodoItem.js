@@ -116,7 +116,7 @@ export default class TodoItem extends HTMLElement {
    */
   loadNewTodo () {
     return this.childComponentsPromise || (this.childComponentsPromise = import('./NewTodo.js').then(module => {
-      if (!customElements.get('new-todo')) customElements.define('new-todo', module.default)
+      if (!customElements.get('new-todo')) customElements.define('new-todo', module.default, { extends: 'input' })
       return module.default
     }))
   }
