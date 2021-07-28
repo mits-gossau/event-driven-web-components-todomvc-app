@@ -2,7 +2,7 @@
 	<section class="todoapp">
 		<header class="header">
 			<h1>todos</h1>
-			<input class="new-todo" placeholder="What needs to be done?" autofocus>
+			<NewTodo />
 		</header>
 		<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
@@ -34,8 +34,19 @@
 </template>
 
 <script setup>
+import {provide, computed, reactive} from 'vue';
 import TodoList from './components/TodoList.vue';
+import NewTodo from './components/NewTodo.vue';
 import Footerbar from './components/Footerbar.vue';
+
+const items = reactive(JSON.parse(localStorage.getItem('todos') || []).sort((a, b) => Number(a.id)))
+
+const updateItems = () => {
+	localStorage.setItem('todos', JSON.stringify(items))
+}
+
+provide('items', items)
+provide('updateItems', updateItems)
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
