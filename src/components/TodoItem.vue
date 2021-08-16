@@ -3,9 +3,9 @@
 	<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
 	<li :class="{'completed': item.completed, 'editing': isEditing }" @dblclick="onDblClick(item)">
 		<div class="view">
-			<input class="toggle" type="checkbox" @click="checkedListener(item.id)" :checked="item.completed">
+			<input class="toggle" type="checkbox" @click="checkItem(item.id)" :checked="item.completed">
 			<label>{{item.title}}</label>
-			<button class="destroy"></button>
+			<button class="destroy" @click="deleteItem(item.id)"></button>
 		</div>
 		<input class="edit"
 			ref="inputEdit"
@@ -19,8 +19,9 @@
 <script setup>
 import { ref, inject, nextTick } from 'vue';
 
-	const items = inject('items')
-	const updateItems = inject('updateItems')
+	const updateItem = inject('updateItem')
+	const deleteItem = inject('deleteItem')
+	const checkItem = inject('checkItem')
 
 	let isEditing = ref(false);
 	const inputEdit = ref(null)
@@ -39,20 +40,13 @@ import { ref, inject, nextTick } from 'vue';
 		inputEdit.value.focus();
 	}
 
-	const checkedListener = (id) => {
-		items.forEach(item => {
-			if(item.id === id) item.completed = !item.completed
-		});
-		updateItems()
-	}
-
 	const resetInput = (item) => {
 		item.title = tempVal;
 		isEditing.value = false;
 	}
 
 	const updateInput = () => {
-		updateItems();
+		updateItem();
 		isEditing.value = false;
 	}
 

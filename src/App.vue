@@ -6,8 +6,6 @@
 		</header>
 		<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
-				<input id="toggle-all" class="toggle-all" type="checkbox">
-				<label for="toggle-all">Mark all as complete</label>
 				<TodoList />
 			</section>
 			<!-- This footer should be hidden by default and shown when there are todos -->
@@ -39,14 +37,46 @@ import TodoList from './components/TodoList.vue';
 import NewTodo from './components/NewTodo.vue';
 import Footerbar from './components/Footerbar.vue';
 
-const items = reactive(JSON.parse(localStorage.getItem('todos') || []).sort((a, b) => Number(a.id)))
+let state = reactive({items: JSON.parse(localStorage.getItem('todos') || []).sort((a, b) => Number(a.id))})
 
-const updateItems = () => {
-	localStorage.setItem('todos', JSON.stringify(items))
+const setItems = () => {
+	localStorage.setItem('todos', JSON.stringify(state.items))
 }
 
-provide('items', items)
-provide('updateItems', updateItems)
+const updateItem = (item) => {
+	setItems();
+}
+
+const checkItem = (id) => {
+	state.items.forEach(item => {
+			if(item.id === id) item.completed = !item.completed
+		});
+	setItems();
+}
+
+const addItem = (item) => {
+	state.items.push(item);
+	setItems();
+}
+const deleteItem = (id) => {
+	state.items = state.items.filter(el => el.id !== id)
+	setItems();
+}
+
+const toggleAll = () => {
+	state.items.every((el) => el.completed) ?
+	state.items.map(el => el.completed = false) :
+	state.items.map(el => el.completed = true);
+	setItems();
+}
+
+
+provide('state', state)
+provide('updateItem', updateItem)
+provide('deleteItem', deleteItem)
+provide('addItem', addItem)
+provide('checkItem', checkItem)
+provide('toggleAll', toggleAll)
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md

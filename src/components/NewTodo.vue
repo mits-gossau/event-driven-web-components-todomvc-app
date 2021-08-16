@@ -7,17 +7,16 @@ import { inject, ref } from 'vue';
 
 let inputValue = ref('')
 
-const items = inject('items')
-const updateItems = inject('updateItems')
+const state = inject('state')
+const addItem = inject('addItem')
 
 const updateListener = () => {
 	const newTodo = {
-		'id': items.length,
+		'id': state.items.length,
 		'title': inputValue.value,
 		'checked': false
 	}
-	items.push(newTodo)
-	updateItems()
+	addItem(newTodo)
 	inputValue.value = ''
 }
 
