@@ -9,7 +9,7 @@
 				<TodoList />
 			</section>
 			<!-- This footer should be hidden by default and shown when there are todos -->
-			<footer class="footer">
+			<footer class="footer" v-if="state.items.length > 0">
 				<!-- This should be `0 items left` by default -->
 				<span class="todo-count"><strong>0</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
@@ -25,19 +25,23 @@
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed">Clear completed</button>
+				<button class="clear-completed" @click="clearCompleted">Clear completed</button>
 			</footer>
 	</section>
 	<Footerbar />
 </template>
 
 <script setup>
-import {provide, computed, reactive} from 'vue';
+import {provide, reactive} from 'vue';
 import TodoList from './components/TodoList.vue';
 import NewTodo from './components/NewTodo.vue';
 import Footerbar from './components/Footerbar.vue';
 
-let state = reactive({items: JSON.parse(localStorage.getItem('todos') || []).sort((a, b) => Number(a.id))})
+
+let state = reactive({
+	items: JSON.parse(localStorage.getItem('todos') || '[]').sort((a, b) => Number(a.id)),
+	currentRoute: window.location.hash.slice(2)
+});
 
 const setItems = () => {
 	localStorage.setItem('todos', JSON.stringify(state.items))
@@ -48,16 +52,19 @@ const updateItem = (item) => {
 }
 
 const checkItem = (id) => {
-	state.items.forEach(item => {
-			if(item.id === id) item.completed = !item.completed
+	state.items.forEach(el => {
+			if(el.id === id) el.completed = !el.completed
 		});
 	setItems();
 }
 
 const addItem = (item) => {
 	state.items.push(item);
+	state.items.forEach((el, index) => el.id = index);
+
 	setItems();
 }
+
 const deleteItem = (id) => {
 	state.items = state.items.filter(el => el.id !== id)
 	setItems();
@@ -70,6 +77,10 @@ const toggleAll = () => {
 	setItems();
 }
 
+const clearCompleted = () => {
+	state.items = state.items.filter(el => !el.completed);
+	setItems();
+}
 
 provide('state', state)
 provide('updateItem', updateItem)
@@ -77,6 +88,10 @@ provide('deleteItem', deleteItem)
 provide('addItem', addItem)
 provide('checkItem', checkItem)
 provide('toggleAll', toggleAll)
+
+window.addEventListener('hashchange', () => {
+	state.currentRoute = window.location.hash.slice(2)
+});
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md

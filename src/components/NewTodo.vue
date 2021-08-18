@@ -7,13 +7,14 @@ import { inject, ref } from 'vue';
 
 let inputValue = ref('')
 
-const state = inject('state')
 const addItem = inject('addItem')
 
 const updateListener = () => {
+	const title = inputValue.value.trim();
+	if (!title) return;
+
 	const newTodo = {
-		'id': state.items.length,
-		'title': inputValue.value,
+		'title': title,
 		'checked': false
 	}
 	addItem(newTodo)

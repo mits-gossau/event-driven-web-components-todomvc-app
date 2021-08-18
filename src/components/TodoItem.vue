@@ -1,10 +1,13 @@
 <template>
 	<!-- These are here just to show the structure of the list items -->
 	<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-	<li :class="{'completed': item.completed, 'editing': isEditing }" @dblclick="onDblClick(item)">
+	<li
+		:class="{'completed': item.completed, 'editing': isEditing }"
+		v-if="showItem"
+	>
 		<div class="view">
 			<input class="toggle" type="checkbox" @click="checkItem(item.id)" :checked="item.completed">
-			<label>{{item.title}}</label>
+			<label @dblclick="onDblClick(item)">{{item.title}}</label>
 			<button class="destroy" @click="deleteItem(item.id)"></button>
 		</div>
 		<input class="edit"
@@ -17,24 +20,27 @@
 	</li>
 </template>
 <script setup>
-import { ref, inject, nextTick } from 'vue';
+import { ref, inject, nextTick, computed } from 'vue';
 
+	const state = inject('state')
 	const updateItem = inject('updateItem')
 	const deleteItem = inject('deleteItem')
 	const checkItem = inject('checkItem')
 
-	let isEditing = ref(false);
-	const inputEdit = ref(null)
-
-	let tempVal = ''
-
-	defineProps({
+	const props = defineProps({
 		item: Object,
 	});
 
+	let isEditing = ref(false);
+	const inputEdit = ref(null)
+	let tempVal = ''
+
+	const showItem = computed(() => state.currentRoute === 'active' && !props.item.completed ||
+	state.currentRoute === 'completed' && props.item.completed ||
+	state.currentRoute !== 'active' && state.currentRoute !== 'completed');
+
 	const onDblClick = async (item) => {
 		tempVal = item.title;
-		console.log(tempVal);
 		isEditing.value = true;
 		await nextTick()
 		inputEdit.value.focus();
