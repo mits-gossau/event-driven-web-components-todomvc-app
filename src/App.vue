@@ -11,28 +11,28 @@
 			<!-- This footer should be hidden by default and shown when there are todos -->
 			<footer class="footer" v-if="state.items.length > 0">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>0</strong> item left</span>
+				<span class="todo-count"><strong>{{itemsLeft}}</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
-						<a class="selected" href="#/">All</a>
+						<a :class="{selected: state.currentRoute !== 'active' && state.currentRoute !== 'completed'}" href="#/">All</a>
 					</li>
 					<li>
-						<a href="#/active">Active</a>
+						<a :class="{selected: state.currentRoute === 'active'}" href="#/active">Active</a>
 					</li>
 					<li>
-						<a href="#/completed">Completed</a>
+						<a :class="{selected: state.currentRoute === 'completed'}" href="#/completed">Completed</a>
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed" @click="clearCompleted">Clear completed</button>
+				<button class="clear-completed" v-if="state.items.some(item => item.completed)" @click="clearCompleted">Clear completed</button>
 			</footer>
 	</section>
 	<Footerbar />
 </template>
 
 <script setup>
-import {provide, reactive} from 'vue';
+import {provide, reactive, computed} from 'vue';
 import TodoList from './components/TodoList.vue';
 import NewTodo from './components/NewTodo.vue';
 import Footerbar from './components/Footerbar.vue';
@@ -42,6 +42,8 @@ let state = reactive({
 	items: JSON.parse(localStorage.getItem('todos') || '[]').sort((a, b) => Number(a.id)),
 	currentRoute: window.location.hash.slice(2)
 });
+
+const itemsLeft = computed(() => state.items.filter(item => !item.completed).length)
 
 const setItems = () => {
 	localStorage.setItem('todos', JSON.stringify(state.items))
