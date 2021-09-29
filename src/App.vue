@@ -9,34 +9,21 @@
 				<TodoList />
 			</section>
 			<!-- This footer should be hidden by default and shown when there are todos -->
-			<footer class="footer" v-if="state.items.length > 0">
-				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>{{itemsLeft}}</strong> item left</span>
-				<!-- Remove this if you don't implement routing -->
-				<ul class="filters">
-					<li>
-						<a :class="{selected: state.currentRoute !== 'active' && state.currentRoute !== 'completed'}" href="#/">All</a>
-					</li>
-					<li>
-						<a :class="{selected: state.currentRoute === 'active'}" href="#/active">Active</a>
-					</li>
-					<li>
-						<a :class="{selected: state.currentRoute === 'completed'}" href="#/completed">Completed</a>
-					</li>
-				</ul>
-				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed" v-if="state.items.some(item => item.completed)" @click="clearCompleted">Clear completed</button>
-			</footer>
+			<ui-todo-footer></ui-todo-footer>
+
 	</section>
 	<Footerbar />
 </template>
 
 <script setup>
-import {provide, reactive, computed} from 'vue';
+import {provide, reactive, computed, defineCustomElement} from 'vue';
 import TodoList from './components/TodoList.vue';
 import NewTodo from './components/NewTodo.vue';
 import Footerbar from './components/Footerbar.vue';
+import TodoFooter from './components/TodoFooter.ce.vue';
 
+const TodoFooterWebComponent = defineCustomElement(TodoFooter);
+customElements.define('ui-todo-footer', TodoFooterWebComponent);
 
 let state = reactive({
 	items: JSON.parse(localStorage.getItem('todos') || '[]').sort((a, b) => Number(a.id)),
@@ -85,11 +72,13 @@ const clearCompleted = () => {
 }
 
 provide('state', state)
+provide('itemsLeft', itemsLeft)
 provide('updateItem', updateItem)
 provide('deleteItem', deleteItem)
 provide('addItem', addItem)
 provide('checkItem', checkItem)
 provide('toggleAll', toggleAll)
+provide('clearCompleted', clearCompleted)
 
 window.addEventListener('hashchange', () => {
 	state.currentRoute = window.location.hash.slice(2)
