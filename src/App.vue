@@ -17,10 +17,14 @@
 
 <script setup>
 import {provide, reactive, computed, defineCustomElement} from 'vue';
+
+import { setCurrentRoute } from './composables/useCurrentRoute.js';
+
 import TodoList from './components/TodoList.vue';
 import NewTodo from './components/NewTodo.ce.vue';
 import Footerbar from './components/Footerbar.ce.vue';
 import TodoFooter from './components/TodoFooter.ce.vue';
+
 
 const NewTodoWebComponent = defineCustomElement(NewTodo);
 const FooterbarWebComponent = defineCustomElement(Footerbar);
@@ -32,7 +36,6 @@ customElements.define('ui-todo-footer', TodoFooterWebComponent);
 
 let state = reactive({
 	items: JSON.parse(localStorage.getItem('todos') || '[]').sort((a, b) => Number(a.id)),
-	currentRoute: window.location.hash.slice(2)
 });
 
 const itemsLeft = computed(() => state.items.filter(item => !item.completed).length)
@@ -85,9 +88,7 @@ provide('checkItem', checkItem)
 provide('toggleAll', toggleAll)
 provide('clearCompleted', clearCompleted)
 
-window.addEventListener('hashchange', () => {
-	state.currentRoute = window.location.hash.slice(2)
-});
+window.addEventListener('hashchange', setCurrentRoute);
 
 // This starter template is using Vue 3 experimental <script setup> SFCs
 // Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md

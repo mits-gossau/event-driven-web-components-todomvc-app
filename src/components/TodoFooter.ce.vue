@@ -5,13 +5,13 @@
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a :class="{selected: state.currentRoute !== 'active' && state.currentRoute !== 'completed'}" href="#/">All</a>
+          <a :class="{selected: getCurrentRoute !== 'active' && getCurrentRoute !== 'completed'}" href="#/">All</a>
         </li>
         <li>
-          <a :class="{selected: state.currentRoute === 'active'}" href="#/active">Active</a>
+          <a :class="{selected: getCurrentRoute === 'active'}" href="#/active">Active</a>
         </li>
         <li>
-          <a :class="{selected: state.currentRoute === 'completed'}" href="#/completed">Completed</a>
+          <a :class="{selected: getCurrentRoute === 'completed'}" href="#/completed">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
@@ -20,10 +20,12 @@
 </template>
 <script setup>
 	import { inject } from 'vue';
+  import { getCurrentRoute } from '../composables/useCurrentRoute';
 
 	const state = inject('state')
 	const itemsLeft = inject('itemsLeft')
 	const clearCompleted = inject('clearCompleted')
+
 </script>
 <style>
 </style>

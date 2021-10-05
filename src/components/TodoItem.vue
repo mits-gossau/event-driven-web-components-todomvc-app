@@ -20,7 +20,8 @@
 	</li>
 </template>
 <script setup>
-import { ref, inject, nextTick, computed } from 'vue';
+	import { ref, inject, nextTick, computed } from 'vue';
+	import { getCurrentRoute } from '../composables/useCurrentRoute';
 
 	const state = inject('state')
 	const updateItem = inject('updateItem')
@@ -35,9 +36,9 @@ import { ref, inject, nextTick, computed } from 'vue';
 	const inputEdit = ref(null)
 	let tempVal = ''
 
-	const showItem = computed(() => state.currentRoute === 'active' && !props.item.completed ||
-	state.currentRoute === 'completed' && props.item.completed ||
-	state.currentRoute !== 'active' && state.currentRoute !== 'completed');
+	const showItem = computed(() => getCurrentRoute.value === 'active' && !props.item.completed ||
+	getCurrentRoute.value === 'completed' && props.item.completed ||
+	getCurrentRoute.value !== 'active' && getCurrentRoute.value !== 'completed');
 
 	const onDblClick = async (item) => {
 		tempVal = item.title;
