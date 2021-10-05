@@ -2,7 +2,7 @@
 	<section class="todoapp">
 		<header class="header">
 			<h1>todos</h1>
-			<NewTodo />
+			<ui-new-todo></ui-new-todo>
 		</header>
 		<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
@@ -12,17 +12,22 @@
 			<ui-todo-footer></ui-todo-footer>
 
 	</section>
-	<Footerbar />
+	<ui-footerbar></ui-footerbar>
 </template>
 
 <script setup>
 import {provide, reactive, computed, defineCustomElement} from 'vue';
 import TodoList from './components/TodoList.vue';
-import NewTodo from './components/NewTodo.vue';
-import Footerbar from './components/Footerbar.vue';
+import NewTodo from './components/NewTodo.ce.vue';
+import Footerbar from './components/Footerbar.ce.vue';
 import TodoFooter from './components/TodoFooter.ce.vue';
 
+const NewTodoWebComponent = defineCustomElement(NewTodo);
+const FooterbarWebComponent = defineCustomElement(Footerbar);
 const TodoFooterWebComponent = defineCustomElement(TodoFooter);
+
+customElements.define('ui-new-todo', NewTodoWebComponent);
+customElements.define('ui-footerbar', FooterbarWebComponent);
 customElements.define('ui-todo-footer', TodoFooterWebComponent);
 
 let state = reactive({
