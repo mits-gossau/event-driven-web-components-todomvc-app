@@ -1,7 +1,8 @@
-import { ref } from 'vue';
+import { ref, readonly } from 'vue';
 
-let currentRoute = ref(window.location.hash.slice(2));
-const setCurrentRoute = () => currentRoute.value = window.location.hash.slice(2);
+const stateCurrentRoute = ref(window.location.hash.slice(2));
+const currentRoute = readonly(stateCurrentRoute);
+const setCurrentRoute = () => stateCurrentRoute.value = window.location.hash.slice(2);
 
 export {
   currentRoute,
