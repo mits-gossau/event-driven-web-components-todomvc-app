@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import {provide, reactive, computed, defineCustomElement} from 'vue';
+import { defineCustomElement } from 'vue';
 
 import { setCurrentRoute } from './composables/useCurrentRoute.js';
 
@@ -25,7 +25,6 @@ import NewTodo from './components/NewTodo.ce.vue';
 import Footerbar from './components/Footerbar.ce.vue';
 import TodoFooter from './components/TodoFooter.ce.vue';
 
-
 const NewTodoWebComponent = defineCustomElement(NewTodo);
 const FooterbarWebComponent = defineCustomElement(Footerbar);
 const TodoFooterWebComponent = defineCustomElement(TodoFooter);
@@ -33,60 +32,6 @@ const TodoFooterWebComponent = defineCustomElement(TodoFooter);
 customElements.define('ui-new-todo', NewTodoWebComponent);
 customElements.define('ui-footerbar', FooterbarWebComponent);
 customElements.define('ui-todo-footer', TodoFooterWebComponent);
-
-let state = reactive({
-	items: JSON.parse(localStorage.getItem('todos') || '[]').sort((a, b) => Number(a.id)),
-});
-
-const itemsLeft = computed(() => state.items.filter(item => !item.completed).length)
-
-const setItems = () => {
-	localStorage.setItem('todos', JSON.stringify(state.items))
-}
-
-const updateItem = (item) => {
-	setItems();
-}
-
-const checkItem = (id) => {
-	state.items.forEach(el => {
-			if(el.id === id) el.completed = !el.completed
-		});
-	setItems();
-}
-
-const addItem = (item) => {
-	state.items.push(item);
-	state.items.forEach((el, index) => el.id = index);
-
-	setItems();
-}
-
-const deleteItem = (id) => {
-	state.items = state.items.filter(el => el.id !== id)
-	setItems();
-}
-
-const toggleAll = () => {
-	state.items.every((el) => el.completed) ?
-	state.items.map(el => el.completed = false) :
-	state.items.map(el => el.completed = true);
-	setItems();
-}
-
-const clearCompleted = () => {
-	state.items = state.items.filter(el => !el.completed);
-	setItems();
-}
-
-provide('state', state)
-provide('itemsLeft', itemsLeft)
-provide('updateItem', updateItem)
-provide('deleteItem', deleteItem)
-provide('addItem', addItem)
-provide('checkItem', checkItem)
-provide('toggleAll', toggleAll)
-provide('clearCompleted', clearCompleted)
 
 window.addEventListener('hashchange', setCurrentRoute);
 

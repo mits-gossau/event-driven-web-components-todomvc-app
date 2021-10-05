@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer" v-if="state.items.length > 0">
+  <footer class="footer" v-if="todoItems.length > 0">
       <!-- This should be `0 items left` by default -->
-      <span class="todo-count"><strong>{{itemsLeft}}</strong> item left</span>
+      <span class="todo-count"><strong>{{todoItemsLeft}}</strong> item left</span>
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
@@ -15,17 +15,12 @@
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
-      <button class="clear-completed" v-if="state.items.some(item => item.completed)" @click="clearCompleted">Clear completed</button>
+      <button class="clear-completed" v-if="todoItems.some(item => item.completed)" @click="clearCompleted">Clear completed</button>
   </footer>
 </template>
 <script setup>
-	import { inject } from 'vue';
   import { currentRoute } from '../composables/useCurrentRoute';
-
-	const state = inject('state')
-	const itemsLeft = inject('itemsLeft')
-	const clearCompleted = inject('clearCompleted')
-
+  import { todoItems, todoItemsLeft, clearCompleted } from '../composables/useTodoItems';
 </script>
 <style>
 </style>

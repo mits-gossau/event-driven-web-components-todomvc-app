@@ -3,11 +3,10 @@
 </template>
 
 <script setup>
-import { inject, ref } from 'vue';
+import { ref } from 'vue';
+import { addItem } from '../composables/useTodoItems';
 
 let inputValue = ref('')
-
-const addItem = inject('addItem')
 
 const updateListener = () => {
 	const title = inputValue.value.trim();
@@ -20,5 +19,4 @@ const updateListener = () => {
 	addItem(newTodo)
 	inputValue.value = ''
 }
-
 </script>

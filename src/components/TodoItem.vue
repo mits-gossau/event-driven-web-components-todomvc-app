@@ -20,13 +20,9 @@
 	</li>
 </template>
 <script setup>
-	import { ref, unref, inject, nextTick, computed } from 'vue';
+	import { ref, unref, nextTick, computed } from 'vue';
 	import { currentRoute } from '../composables/useCurrentRoute';
-
-	const state = inject('state')
-	const updateItem = inject('updateItem')
-	const deleteItem = inject('deleteItem')
-	const checkItem = inject('checkItem')
+	import { updateItem, deleteItem, checkItem } from '../composables/useTodoItems';
 
 	const props = defineProps({
 		item: Object,
