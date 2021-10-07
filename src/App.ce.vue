@@ -20,11 +20,13 @@ import { defineCustomElement } from 'vue';
 
 import { setCurrentRoute } from './composables/useCurrentRoute.js';
 
-import TodoList from './components/TodoList.vue';
-import TodoItem from './components/TodoItem.vue';
+import TodoList from './components/TodoList.ce.vue';
+import TodoItem from './components/TodoItem.ce.vue';
 import NewTodo from './components/NewTodo.ce.vue';
 import Footerbar from './components/Footerbar.ce.vue';
 import TodoFooter from './components/TodoFooter.ce.vue';
+
+import Button from './components/webcomponents/Button.js';
 
 const TodoListWebComponent = defineCustomElement(TodoList);
 const TodoItemWebComponent = defineCustomElement(TodoItem);
@@ -37,6 +39,7 @@ customElements.define('ui-todo-item', TodoItemWebComponent);
 customElements.define('ui-new-todo', NewTodoWebComponent);
 customElements.define('ui-footerbar', FooterbarWebComponent);
 customElements.define('ui-todo-footer', TodoFooterWebComponent);
+customElements.define('ui-button', Button);
 
 window.addEventListener('hashchange', setCurrentRoute);
 
@@ -45,7 +48,24 @@ window.addEventListener('hashchange', setCurrentRoute);
 </script>
 
 <style>
-#app {
+	.todoapp {
+		background: #fff;
+		margin: 130px 0 40px 0;
+		position: relative;
+		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+					0 25px 50px 0 rgba(0, 0, 0, 0.1);
+	}
 
-}
+	.todoapp h1 {
+		position: absolute;
+		top: -155px;
+		width: 100%;
+		font-size: 100px;
+		font-weight: 100;
+		text-align: center;
+		color: rgba(175, 47, 47, 0.15);
+		-webkit-text-rendering: optimizeLegibility;
+		-moz-text-rendering: optimizeLegibility;
+		text-rendering: optimizeLegibility;
+	}
 </style>
