@@ -5,12 +5,11 @@
 			<ui-new-todo></ui-new-todo>
 		</header>
 		<!-- This section should be hidden by default and shown when there are todos -->
-			<section class="main">
-				<ui-todo-list></ui-todo-list>
-			</section>
-			<!-- This footer should be hidden by default and shown when there are todos -->
-			<ui-todo-footer></ui-todo-footer>
-
+		<section class="main">
+			<ui-todo-list></ui-todo-list>
+		</section>
+		<!-- This footer should be hidden by default and shown when there are todos -->
+		<ui-todo-footer></ui-todo-footer>
 	</section>
 	<ui-footerbar></ui-footerbar>
 </template>
@@ -48,24 +47,23 @@ window.addEventListener('hashchange', setCurrentRoute);
 </script>
 
 <style>
-	.todoapp {
-		background: #fff;
-		margin: 130px 0 40px 0;
-		position: relative;
-		box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-					0 25px 50px 0 rgba(0, 0, 0, 0.1);
-	}
+.todoapp {
+	background: #fff;
+	margin: 130px 0 40px 0;
+	position: relative;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
 
-	.todoapp h1 {
-		position: absolute;
-		top: -155px;
-		width: 100%;
-		font-size: 100px;
-		font-weight: 100;
-		text-align: center;
-		color: rgba(175, 47, 47, 0.15);
-		-webkit-text-rendering: optimizeLegibility;
-		-moz-text-rendering: optimizeLegibility;
-		text-rendering: optimizeLegibility;
-	}
+.todoapp h1 {
+	position: absolute;
+	top: -155px;
+	width: 100%;
+	font-size: 100px;
+	font-weight: 100;
+	text-align: center;
+	color: rgba(175, 47, 47, 0.15);
+	-webkit-text-rendering: optimizeLegibility;
+	-moz-text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
+}
 </style>

@@ -1,21 +1,22 @@
 export default class Button extends HTMLElement {
-
 	constructor() {
 		super();
-		this.attachShadow({mode: 'open'});
+		this.attachShadow({ mode: 'open' });
 	}
 
-	connectedCallback(){
+	connectedCallback() {
 		this.render();
-		this.dispatchEvent(new CustomEvent('hello',{
-			detail: {value: 'hey'},
-			bubbles: true,
-			cancelable: true,
-			composed: true
-		  }))
+		this.dispatchEvent(
+			new CustomEvent('hello', {
+				detail: { value: 'hey' },
+				bubbles: true,
+				cancelable: true,
+				composed: true,
+			})
+		);
 	}
 
-	render(){
+	render() {
 		this.shadowRoot.innerHTML = /* html */ `
 			<style>
 				button {
@@ -35,6 +36,6 @@ export default class Button extends HTMLElement {
 			}
 			</style>
 			<button>${this.innerHTML}</button>
-		`
+		`;
 	}
 }
