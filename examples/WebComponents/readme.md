@@ -30,7 +30,3 @@
 
 Frontend Event Driven Architecture works basically like the DOM itself. There are loosely coupled components (nodes), which emit events and those get captured by other components. They may also emit events on their behalf, which can be consumed.
 
-
-## Credit
-
-Created by [スィルヴァン aka. Weedshaker](https://github.com/Weedshaker)
