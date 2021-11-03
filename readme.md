@@ -1,36 +1,16 @@
-# Event Driven Web Components • [TodoMVC](http://todomvc.com)
+# TodoMVC App Examples
 
-> Vanilla JS Web Components in an Event Driven Architecture
+We tried out three technologies to build the TodoMVC Example
 
-
-## Resources
-
-- [Document Object Model (DOM)](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
-
-
-### Articles
-
-- [Build an Event Driven TodoMVC App with 8 lightweight VanillaJS Web Components](https://dev.to/weedshaker/build-an-event-driven-todomvc-app-with-8-lightweight-vanillajs-web-components-5b65)
-- [DOM and the event driven architecture - Introduction](https://dev.to/weedshaker/dom-and-the-event-driven-architecture-1519)
-- [Web Components and now what?](https://dev.to/weedshaker/web-components-and-now-what-k97)
+* [Web Components](./examples/WebComponents/readme.md)
+* [Vue 3](./examples/Vue/readme.md)
+* [Vue 3 & Web Components](./examples/VueWebComponents/readme.md)
 
 
-### Support
+## License
 
-- [Twitter](https://twitter.com/weedshaker)
-
-*Let us [know](https://github.com/tastejs/todomvc/issues) if you discover anything worth sharing.*
-
-
-## Browser compatibility
-- [IOS does not yet support "is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is), even though I used it deliberately. You can at anytime fall back to use web components without ["is"](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) => https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define and then it will work in any modern browser.
-
-
-## Implementation
-
-Frontend Event Driven Architecture works basically like the DOM itself. There are loosely coupled components (nodes), which emit events and those get captured by other components. They may also emit events on their behalf, which can be consumed.
-
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://sindresorhus.com" property="cc:attributionName" rel="cc:attributionURL">TasteJS</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a>.
 
 ## Credit
 
-Created by [スィルヴァン aka. Weedshaker](https://github.com/Weedshaker)
+Created by [スィルヴァン aka. Weedshaker](https://github.com/Weedshaker), [V4L3](https://github.com/V4L3) and [TailorMadeCode](https://github.com/tailormadecode)
