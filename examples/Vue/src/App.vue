@@ -11,7 +11,7 @@
 			</section>
 			<TodoFooter />
 		</section>
-	<Footerbar />
+		<Footerbar />
 	</main>
 </template>
 

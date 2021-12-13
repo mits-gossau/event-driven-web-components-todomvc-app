@@ -11,11 +11,10 @@
         "prettier": "^2.5.1",
         "todomvc-app-css": "^2.0.0",
         "todomvc-common": "^1.0.0",
-        "vue": "^3.0.5"
+        "vue": "^3.2.26"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue": "^1.2.4",
-        "@vue/compiler-sfc": "^3.0.5",
-        "vite": "^2.4.0"
+        "@vitejs/plugin-vue": "^1.10.2",
+        "vite": "^2.7.1"
     }
 }
