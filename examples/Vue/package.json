@@ -1,19 +1,21 @@
 {
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
-  "dependencies": {
-    "vue": "^3.0.5",
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.0"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.4",
-    "@vue/compiler-sfc": "^3.0.5",
-    "vite": "^2.4.0"
-  }
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "serve": "vite preview",
+        "format": "prettier .  --write"
+    },
+    "dependencies": {
+        "prettier": "^2.5.1",
+        "todomvc-app-css": "^2.0.0",
+        "todomvc-common": "^1.0.0",
+        "vue": "^3.0.5"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^1.2.4",
+        "@vue/compiler-sfc": "^3.0.5",
+        "vite": "^2.4.0"
+    }
 }
