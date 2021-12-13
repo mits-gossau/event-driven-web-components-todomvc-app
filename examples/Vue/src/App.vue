@@ -17,6 +17,8 @@
 
 <script setup>
 import { provide, reactive, computed } from 'vue';
+import { setCurrentRoute } from './composables/useCurrentRoute';
+
 import TodoList from './components/TodoList.vue';
 import TodoFooter from './components/TodoFooter.vue';
 import NewTodo from './components/NewTodo.vue';
@@ -26,7 +28,6 @@ let state = reactive({
 	items: JSON.parse(localStorage.getItem('todos') || '[]').sort((a, b) =>
 		Number(a.id)
 	),
-	currentRoute: window.location.hash.slice(2),
 });
 
 const itemsLeft = computed(
@@ -81,7 +82,5 @@ provide('checkItem', checkItem);
 provide('toggleAll', toggleAll);
 provide('clearCompleted', clearCompleted);
 
-window.addEventListener('hashchange', () => {
-	state.currentRoute = window.location.hash.slice(2);
-});
+window.addEventListener('hashchange', setCurrentRoute);
 </script>
