@@ -9,6 +9,8 @@
  * @export
  * @class NewTodo
  */
+// 🔔 writing custom elements class - class extends specific HTMLElement
+// corresponding to the custom Elements Definition
 export default class NewTodo extends HTMLInputElement {
   constructor () {
     super()

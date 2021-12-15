@@ -45,6 +45,8 @@
 </template>
 <script setup>
 import { inject } from 'vue';
+
+// ✨ Composition API: use currentRoute
 import { currentRoute } from '../composables/useCurrentRoute';
 
 const state = inject('state');

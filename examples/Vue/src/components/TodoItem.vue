@@ -27,8 +27,11 @@
 </template>
 <script setup>
 import { ref, unref, inject, nextTick, computed } from 'vue';
+
+// ✨ Composition API: use CurrentRoute
 import { currentRoute } from '../composables/useCurrentRoute';
 
+// 🔥 provide/inject pair: with inject the provided data can be used.
 const state = inject('state');
 const updateItem = inject('updateItem');
 const deleteItem = inject('deleteItem');
@@ -38,12 +41,14 @@ const props = defineProps({
 	item: Object,
 });
 
+
 let isEditing = ref(false);
 const inputEdit = ref(null);
 let tempVal = '';
 
 const showItem = computed(
 	() =>
+		// ⚛️ unref: to return the value of an ref
 		(unref(currentRoute) === 'active' && !props.item.completed) ||
 		(unref(currentRoute) === 'completed' && props.item.completed) ||
 		(unref(currentRoute) !== 'active' &&

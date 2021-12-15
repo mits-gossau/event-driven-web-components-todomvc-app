@@ -11,6 +11,7 @@
 		<section class="todoapp">
 			<header class="header">
 				<h1>todos</h1>
+				<!-- 🔔 is-Attribute has the value of the custom Element -->
 				<input class="new-todo" placeholder="What needs to be done?" autofocus is="new-todo">
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
@@ -53,13 +54,15 @@
 			 */
 			Promise.all([
 			  // Controllers
-			  import('./es/components/NoItemsHidden.js').then(module => ['no-items-hidden', module.default, { extends: 'section' }]),
+			  // 🔔 dynamic import
+				import('./es/components/NoItemsHidden.js').then(module => ['no-items-hidden', module.default, { extends: 'section' }]),
 			  import('./es/components/NoItemsHidden.js').then(module => ['no-items-hidden-footer', class extends module.default {}, { extends: 'footer' }]),
 			  import('./es/components/TodoCount.js').then(module => ['todo-count', module.default, { extends: 'span' }]),
 			  import('./es/components/TodoFilters.js').then(module => ['todo-filters', module.default, { extends: 'ul' }]),
 			  import('./es/components/ToggleAll.js').then(module => ['toggle-all', module.default, { extends: 'input' }]),
 			  import('./es/components/ClearCompleted.js').then(module => ['clear-completed', module.default, { extends: 'button' }]),
-			  import('./es/components/NewTodo.js').then(module => ['new-todo', module.default, { extends: 'input' }]),
+				// 🔔 customized built-in element is defined with an extends: 'HTMLElement'
+				import('./es/components/NewTodo.js').then(module => ['new-todo', module.default, { extends: 'input' }]),
 			  import('./es/components/TodoList.js').then(module => ['todo-list', module.default, { extends: 'ul' }])
 			]).then(elements => elements.forEach(element => {
 			  // don't define already existing customElements
